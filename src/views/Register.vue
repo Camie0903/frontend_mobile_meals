@@ -12,6 +12,9 @@
       <button id="register-btn" type="submit">Register</button>
       </div>
     </form>
+     <div>
+      <p>Already have an account?</p><a href="/"><button type="submit" id="login_btn">Login</button></a>
+      </div>
     </div>
     <div v-if="users">Welcome {{ users.full_name }}</div>
   </div>
@@ -93,5 +96,9 @@ h1 {
   border: none;
   font-weight: bolder;
   font-size: 20px;
+}
+#login_btn{
+  border: none;
+  background: transparent;
 }
 </style>

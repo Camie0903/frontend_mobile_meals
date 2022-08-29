@@ -13,6 +13,9 @@
       <button type="submit" @click.prevent="login()" id="login-btn">Login</button>
       </div>
     </form>
+      <div>
+      <p>Don't have an account?</p><a href="/register"><button type="submit" id="regist-btn">Register</button></a>
+      </div>
     </div>
     <div v-if="users">Welcome {{ users.full_name }}</div>
   </div>
@@ -90,6 +93,11 @@ background-image: linear-gradient(to left, #21af85, #00a0a7, #008bbf, #0071be, #
   font-weight: bolder;
   font-size: 20px;
   
+}
+
+#regist-btn{
+  border: none;
+  background: transparent;
 }
 </style>
 

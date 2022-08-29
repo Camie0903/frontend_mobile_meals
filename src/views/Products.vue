@@ -9,12 +9,24 @@
     placeholder="Search by category"
   /> -->
   <div class="filterbtns">
-    <button @click="ChangeFood0">All</button>
-    <button @click="ChangeFood1">Burgers</button>
-    <button @click="ChangeFood2">Sushi</button>
-    <button @click="ChangeFood3">Nachos</button>
-    <button @click="ChangeFood4">Warm Drinks</button>
-    <button @click="ChangeFood5">Cold Drinks</button>
+    <div class="card-cam" @click="ChangeFood0">
+      <h2>All</h2>
+    </div>
+     <div class="card-cam1" @click="ChangeFood1">
+      <h2>Burgers</h2>
+    </div>
+    <div class="card-cam2" @click="ChangeFood2">
+      <h2>Sushi</h2>
+    </div>
+    <div class="card-cam3" @click="ChangeFood3">
+      <h2>Nachos</h2>
+    </div>
+    <div class="card-cam4" @click="ChangeFood4">
+      <h2>Warm Drinks</h2>
+    </div>
+    <div class="card-cam5" @click="ChangeFood5">
+      <h2>Cold Drinks</h2>
+    </div>
   </div>
 
 
@@ -86,6 +98,69 @@ export default {
 };
 </script>
 <style scoped>
+h2{
+  margin-top: 2rem;
+}
+.card-cam {
+  height: 100px;
+  width: 200px;
+  border: 2px solid black;
+  background-image: url("https://i.postimg.cc/J4GJLGkn/all-filter.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}
+.card-cam1 {
+  height: 100px;
+  width: 200px;
+  border: 2px solid black;
+  background-image: url("https://i.postimg.cc/44SdgwZC/burger-filter.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}
+.card-cam2 {
+  height: 100px;
+  width: 200px;
+  border: 2px solid black;
+  background-image: url("https://i.postimg.cc/x82Sfksz/sushi-filter.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}
+.card-cam3 {
+  height: 100px;
+  width: 200px;
+  border: 2px solid black;
+  background-image: url("https://i.postimg.cc/NjH7TpBm/nacho.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}
+.card-cam4 {
+  height: 100px;
+  width: 200px;
+  border: 2px solid black;
+  background-image: url("https://i.postimg.cc/DZ5cZH6P/coffee-filter.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}
+.card-cam5 {
+  height: 100px;
+  width: 200px;
+  border: 2px solid black;
+  background-image: url("https://i.postimg.cc/fWcG7fT4/cooldrinks.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}
 .filterbtns{
 display: flex;
 align-items: flex-start;
