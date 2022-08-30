@@ -1,6 +1,7 @@
 <template>
   <div class="Login">
-    <h1 class="well">Welcome Please Login</h1>
+    <h1 class="well">Welcome Admin</h1>
+    <h2 class="well">Please Login...</h2>
     <div class="container">
     <form @submit.prevent="login" >
       
@@ -14,10 +15,9 @@
       </div>
     </form>
       <div>
-      <p>Don't have an account?</p><a href="/register"><button type="submit" id="regist-btn">Register</button></a> |
   <button class="adm_btn">
-    <a href="/AdminLogin">
-      <h4 class="Adm-Btn">Admin</h4>
+    <a href="/">
+      <h4 class="Adm-Btn">User</h4>
     </a>
   </button>
       </div>
@@ -36,11 +36,12 @@ export default {
   },
   methods: {
     login() {
-      this.$store.dispatch("login", {
-        email: this.email,
-        password: this.password,
-      });
-    },
+        if(this.input.user_type == "admin") {
+            this.$store.commit("setAuthentication", true);
+        } else {
+            alert("You're not an Admin, please login or register as a user");
+        }
+    }
   },
 };
 </script>

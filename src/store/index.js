@@ -7,6 +7,7 @@ export default createStore({
     products: null,
     product: null,
     token: null,
+    authenticated: false
   },
   getters: {},
   mutations: {
@@ -22,7 +23,9 @@ export default createStore({
     settoken: (state, token) => {
       state.token = token;
     },
-
+    setAuthentication(state, status) {
+      state.authenticated = status;
+    },
    
   },
   actions: {
