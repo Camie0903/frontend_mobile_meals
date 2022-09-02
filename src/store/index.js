@@ -37,7 +37,7 @@ export default createStore({
     // Login
     login: async (context, payload) => {
       let res = await fetch("https://mobile-meals.herokuapp.com/users/login", {
-        method: "POST",
+        method:"POST",
         headers: {
           "Content-Type": "application/json",
         },
@@ -61,7 +61,7 @@ export default createStore({
           .then((res) => res.json())
           .then((data) => {
             context.commit("setuser", data.user);
-            router.push("/products");
+            router.push("/products" , alert("Successfully logged in"));
           });
       } else {
         alert(data);
