@@ -33,11 +33,11 @@
 						</div>
 					</form>
           <div>
+            <a href="/AdminLogin">
             <button class="adm_btn">
-              <a href="/AdminLogin">
                 <h4 class="Adm-Btn">Admin</h4> 
-              </a>
               </button>
+            </a>
           </div>
 				</div>
 			</div>
