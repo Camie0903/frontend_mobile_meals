@@ -22,22 +22,23 @@
 								<p class="forget">Forgot Password?
 									<a href="#">Click here</a>
 								</p>
-								<p class="forget">Don't have an account?</p>
-                <a href="/register">
+								<p class="forget">Don't have an account?
                   <button type="submit" id="regist_btn">
+                    <a href="/register">
                     Register
+                  </a>
                   </button>
-                </a>
-								<div>
-									<button class="adm_btn">
-                    <a href="/AdminLogin">
-                      <h4 class="Adm-Btn">Admin</h4>t 
-                    </a>
-                  </button>
-                </div>
+                </p>
 							</div>
 						</div>
 					</form>
+          <div>
+            <button class="adm_btn">
+              <a href="/AdminLogin">
+                <h4 class="Adm-Btn">Admin</h4> 
+              </a>
+              </button>
+          </div>
 				</div>
 			</div>
 		</div>
@@ -203,7 +204,7 @@ section .color:nth-child(3) {
 
 .form h2 {
   position: relative;
-  color: #fff;
+  color: black;
   font-size: 24px;
   font-weight: 600;
   letter-spacing: 1px;
@@ -217,7 +218,7 @@ section .color:nth-child(3) {
   bottom: -10px;
   width: 80px;
   height: 4px;
-  background: #fff;
+  background: black;
 }
 
 .form .inputBox {
@@ -237,7 +238,7 @@ section .color:nth-child(3) {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   font-size: 16px;
   letter-spacing: 1px;
-  color: #fff;
+  color: #000;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
@@ -252,11 +253,11 @@ section .color:nth-child(3) {
 
 .forget {
   margin-top: 5px;
-  color: #fff;
+  color: #000;
 }
 
 .forget a {
-  color: #fff;
+  color: #000;
   font-weight: 600;
 }
 </style>

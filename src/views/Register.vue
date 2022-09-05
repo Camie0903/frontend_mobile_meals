@@ -197,7 +197,7 @@ export default {
   
   .form h2 {
     position: relative;
-    color: #fff;
+    color: #000;
     font-size: 24px;
     font-weight: 600;
     letter-spacing: 1px;
@@ -211,7 +211,7 @@ export default {
     bottom: -10px;
     width: 80px;
     height: 4px;
-    background: #fff;
+    background: #000;
   }
   
   .form .inputBox {
@@ -231,7 +231,7 @@ export default {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     font-size: 16px;
     letter-spacing: 1px;
-    color: #fff;
+    color: #000;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   }
   
@@ -246,11 +246,11 @@ export default {
   
   .forget {
     margin-top: 5px;
-    color: #fff;
+    color: #000;
   }
   
   .forget a {
-    color: #fff;
+    color: #000;
     font-weight: 600;
   }
 </style>

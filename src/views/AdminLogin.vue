@@ -1,29 +1,42 @@
 <template>
-  <div class="Login">
-    <h1 class="well">Welcome Admin</h1>
-    <h2 class="well">Please Login...</h2>
-    <div class="container">
-    <form @submit.prevent="login" >
-      
-      <input class="login-form-email" type="text" v-model="email" placeholder="Email" />
-     
-    
-      <input class="login-form-password" type="text" v-model="password" placeholder="Password" />
-     
-      <div>
-      <button type="submit" @click.prevent="login()" id="login-btn">Login</button>
-      </div>
-    </form>
-      <div>
-  <button class="adm_btn">
-    <a href="/">
-      <h4 class="Adm-Btn">User</h4>
-    </a>
-  </button>
-      </div>
-    </div>
-    <div v-if="users">Welcome {{ users.full_name }}</div>
-  </div>
+  <section>
+		<div class="color"></div>
+		<div class="color"></div>
+		<div class="color"></div>
+		<div class="box">
+			<div class="square" style="--i:0;"></div>
+			<div class="square" style="--i:1;"></div>
+			<div class="square" style="--i:2;"></div>
+			<div class="square" style="--i:3;"></div>
+			<div class="square" style="--i:4;"></div>
+			<div class="square" style="--i:5;"></div>
+			<div class="container">
+				<div class="form">
+					<h2>Welcome Admin, login below.....</h2>
+					<form>
+						<div class="inputBox">
+							<input class="login-form-email" type="text" v-model="email" placeholder="Email" />
+							<input class="login-form-password" type="text" v-model="password" placeholder="Password" />
+							<div class="inputBox">
+								<button type="submit" @click.prevent="login()" id="login-btn">Login</button>
+								<p class="forget">Forgot Password?
+									<a href="#">Click here</a>
+								</p>
+							</div>
+						</div>
+					</form>
+          <div>
+            <a href="/">
+            <button class="user_btn">
+                <h4 class="User-Btn">User</h4> 
+              </button>
+            </a>
+          </div>
+				</div>
+			</div>
+		</div>
+	</section>
+<div v-if="users">Welcome {{ users.full_name }}</div>
 </template>
 <script>
 export default {
@@ -36,82 +49,209 @@ export default {
   },
   methods: {
     login() {
-        if(this.input.user_type == "admin") {
-            this.$store.commit("setAuthentication", true);
-        } else {
-            alert("You're not an Admin, please login or register as a user");
-        }
-    }
+      this.$store.dispatch("login", {
+        email: this.email,
+        password: this.password,
+      });
+    },
   },
 };
 </script>
 <style scoped>
-.adm_btn{
+.user_btn{
   border: none;
   background: transparent;
 }
-.Adm-Btn{
+.User-Btn{
   text-decoration: none;
   color: black;
 
 }
-.well{
-  /* margin-left: 600px; */
-  margin-bottom: 30px;
-  color:black;
+#regist_btn {
+  border: none;
+  background: transparent;
 }
-.Login {
-  padding-top: 80px;
-  height: 80vh;
-background-image: linear-gradient(to left, #21af85, #00a0a7, #008bbf, #0071be, #67509f);  /* background-color: rgba(167, 165, 196, 0.3); */
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: linear-gradient(to bottom, #f1f4f9, #dff1ff);
+}
+
+section .color {
+  position: absolute;
+  filter: blur(150px);
+}
+
+section .color:nth-child(1) {
+  top: -350px;
+  width: 600px;
+  height: 600px;
+  background: #ff359b;
+  /*pink*/
+}
+
+section .color:nth-child(2) {
+  bottom: -150px;
+  width: 600px;
+  height: 600px;
+  background: #fffd87;
+  /*yellow*/
+}
+
+section .color:nth-child(3) {
+  bottom: 50px;
+  width: 300px;
+  height: 300px;
+  background: #00d2ff;
+  /*blue*/
+}
+
+.box {
+  position: relative;
+}
+
+.box .square {
+  position: absolute;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  animation: animate 10s linear infinite;
+  animation-delay: calc(-1s * var(--i));
+}
+
+@keyframes animate {
+  0%, 100% {
+    transform: translateY(-40px);
+  }
+  50% {
+    transform: translateY(40px);
+  }
+}
+.box .square:nth-child(1) {
+  top: -50px;
+  right: -60px;
+  width: 100px;
+  height: 100px;
+}
+
+.box .square:nth-child(2) {
+  top: 150px;
+  left: -100px;
+  width: 120px;
+  height: 120px;
+  z-index: 2;
+}
+
+.box .square:nth-child(3) {
+  bottom: -40px;
+  right: -40px;
+  width: 70px;
+  height: 70px;
+  z-index: 0;
+}
+
+.box .square:nth-child(4) {
+  bottom: -60px;
+  left: 40px;
+  width: 50px;
+  height: 50px;
+  z-index: 2;
+}
+
+.box .square:nth-child(5) {
+  top: -50px;
+  left: 120px;
+  width: 50px;
+  height: 50px;
+  z-index: 0;
 }
 
 .container {
-  margin: auto;
-  padding: auto;
-  width: 350px;
-  height: 390px;
-background-image: linear-gradient(to left, #21af85, #00a0a7, #008bbf, #0071be, #67509f);  /* background-color: rgba(167, 165, 196, 0.3); */
-  backdrop-filter: blur(3px);
-  border: 2px solid white;
+  position: relative;
+  width: 400px;
+  height: 400px;
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
-  background-clip: padding-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.login-form-email{
-  margin: 35px;
-   border: 0;
-  outline:0;
-  border-bottom: 2px solid black;
-  width: 50%;
-  font-size: 20px;
-  background: transparent;
-  /* color: white; */
+.form {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 40px;
 }
 
-.login-form-password{
-  margin: 35px;
-  border: 0;
-  outline:0;
-  border-bottom: 2px solid black;
-  width: 50%;
-  font-size: 20px;
-  background: transparent;
-  /* color: white; */
+.form h2 {
+  position: relative;
+  color: black;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 40px;
 }
 
-#login-btn {
-  margin: 35px;
-  background: transparent;
-  border: none;
-  font-weight: bolder;
-  font-size: 20px;
-  
+.form h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 80px;
+  height: 4px;
+  background: black;
 }
 
-#regist-btn{
-  border: none;
-  background: transparent;
+.form .inputBox {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.form .inputBox input {
+  margin-bottom: 10px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  outline: none;
+  padding: 10px 20px;
+  border-radius: 35px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: #000;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.form .inputBox input[type=submit] {
+  background: #fff;
+  color: #666;
+  max-width: 100px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.forget {
+  margin-top: 5px;
+  color: #000;
+}
+
+.forget a {
+  color: #000;
+  font-weight: 600;
 }
 </style>
 

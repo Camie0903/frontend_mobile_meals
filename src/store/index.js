@@ -66,6 +66,7 @@ export default createStore({
       } else {
         alert(data);
       }
+        
     },
     // REGISTER USER
     register: async (context, user) => {
