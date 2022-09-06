@@ -13,12 +13,18 @@
 			<div class="container">
 				<div class="form">
 					<h2>Welcome Please Login</h2>
-					<form>
+					<form @submit.prevent="login">
 						<div class="inputBox">
-							<input class="login-form-email" type="text" v-model="email" placeholder="Email" />
-							<input class="login-form-password" type="text" v-model="password" placeholder="Password" />
-							<div class="inputBox">
-								<button type="submit" @click.prevent="login()" id="login-btn">Login</button>
+							<input class="login-form-email" type="text" v-model="email" placeholder="Email" required/>
+              <div class="control is-expanded">
+                <input v-if="showPassword" type="text" class="input" v-model="password" placeholder="Password"/>
+                <input v-else type="password" class="input" v-model="password"  placeholder="Password">
+                <button class="eyebutton" @click="toggleShow">
+                  <i class="fas" :class="{ 'fa-eye-slash': showPassword, 'fa-eye': !showPassword }"></i>
+                </button>							
+              </div>
+       <div class="inputBox">
+								<button type="submit"  id="login-btn">Login</button>
 								<p class="forget">Forgot Password?
 									<a href="#">Click here</a>
 								</p>
@@ -52,7 +58,14 @@ export default {
     return {
       email: "",
       password: "",
+      showPassword: false,
+      password: null,
     };
+  },
+  computed: {
+    buttonLabel() {
+      return (this.showPassword) ? "Hide" : "Show";
+    }
   },
   methods: {
     login() {
@@ -61,6 +74,9 @@ export default {
         password: this.password,
       });
     },
+    toggleShow() {
+      this.showPassword = !this.showPassword;
+    }
   },
 };
 </script>
@@ -77,6 +93,13 @@ export default {
 #regist_btn {
   border: none;
   background: transparent;
+}
+.eyebutton{
+  background: transparent;
+  border: none;
+  margin-left: 20rem;
+  z-index: 1;
+  margin-top: rem;
 }
 section {
   display: flex;

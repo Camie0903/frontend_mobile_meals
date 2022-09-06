@@ -3,6 +3,7 @@ import router from "@/router";
 
 export default createStore({  
   state: {
+    users: null,
     user: null,
     products: null,
     product: null,
@@ -13,6 +14,9 @@ export default createStore({
   mutations: {
     setuser: (state, user) => {
       state.user = user;
+    },
+    setusers: (state, users) => {
+      state.users = users;
     },
     setproducts: (state, products) => {
       state.products = products;

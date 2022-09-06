@@ -15,24 +15,24 @@
           <h2>If You Are Not A User Please Register ...</h2>
           <form @submit.prevent="register">
             <div class="inputBox">
-              <input class="register-form" type="email" v-model="email" placeholder="Email" />
-              <input class="register-form" type="text" v-model="password" placeholder="Password" />
-              <input class="register-form" type="text" v-model="full_name" placeholder="Full Name" />
-              <input class="register-form" type="text" v-model="phone" placeholder="phone" />
-              <input class="register-form" type="text" v-model="user_type" placeholder="user_type" />
+              <input required class="register-form" type="email" v-model="email" placeholder="Email" />
+              <input required class="register-form" type="text" v-model="password" placeholder="Password" />
+              <input required class="register-form" type="text" v-model="full_name" placeholder="Full Name" />
+              <input required class="register-form" type="text" v-model="phone" placeholder="phone" />
+              <input required class="register-form" type="text" v-model="user_type" placeholder="user_type" />
               <div>
                 <button id="register-btn" type="submit">Register</button>
               </div>
               <div>
                <p>Already have an account?</p>
-               <a href="/">
-                  <button type="submit" id="login_btn">
-                    Login
-                  </button>
-                </a>
               </div>
             </div>
           </form>
+          <a href="/">
+          <button type="submit" id="login_btn">
+               Login
+              </button>
+            </a>
         </div>
         <div v-if="users">Welcome {{ users.full_name }}</div>
       </div>
@@ -42,8 +42,8 @@
  <script>
 export default {
   computed: {
-    user() {
-      return this.$store.state.user;
+    users() {
+      return this.$store.state.users;
     },
   },
   data() {
@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     register() {
-      this.$store.dispatch("register", {
+      return this.$store.dispatch("register", {
         email: this.email,
         password: this.password,
         full_name: this.full_name,
