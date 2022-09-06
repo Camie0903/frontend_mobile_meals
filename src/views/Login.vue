@@ -97,9 +97,6 @@ export default {
 .eyebutton{
   background: transparent;
   border: none;
-  margin-left: 20rem;
-  z-index: 1;
-  margin-top: rem;
 }
 section {
   display: flex;
@@ -220,7 +217,7 @@ section .color:nth-child(3) {
 
 .form {
   position: relative;
-  width: 100%;
+  width: 65%;
   height: 100%;
   padding: 40px;
 }

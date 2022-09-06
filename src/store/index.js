@@ -8,9 +8,12 @@ export default createStore({
     products: null,
     product: null,
     token: null,
-    authenticated: false
+    authenticated: false,
+    StoreCart: []
   },
-  getters: {},
+  getters: {
+    StoreCart: (state) => state.StoreCart,
+  },
   mutations: {
     setuser: (state, user) => {
       state.user = user;
@@ -30,7 +33,13 @@ export default createStore({
     setAuthentication(state, status) {
       state.authenticated = status;
     },
-   
+    ADD_Item(state, user_id) {
+      state.StoreCart.push(user_id);
+    },
+
+    REMOVE_Item(state, index) {
+      state.StoreCart.splice(index, 1);
+  },
   },
   actions: {
     logout: async (context) => {
@@ -136,7 +145,14 @@ export default createStore({
         .then((response) => response.json())
         .then(() => context.dispatch("getProducts"));
     },
-  
+    addItem(context, user_id) {
+      context.commit("ADD_Item", user_id);
+    },
+
+    removeItem(context, index) {
+      context.commit("REMOVE_Item", index);
+    },
+
     },
   modules: {},
 });

@@ -1,13 +1,28 @@
 <template>
   <Navbar/>
   <router-view/>
+  <Product
+      v-for="product  in  products"
+      :key="product.id"
+      :id="product.id"
+      :title="product.title"
+      :image="product.image"
+      :price="product.price"
+    />
 </template>
 <script>
 import Navbar from "./components/Navbar.vue";
+import Product from "./views/Products.vue";
 export default{
   name:"App",
+  computed: {
+    products() {
+      return this.$store.getters.products;
+    }
+  },
   components:{
     Navbar,
+    Product
   }
 }
 </script>

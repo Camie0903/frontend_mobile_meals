@@ -13,6 +13,7 @@
         <router-link to="/register">Register</router-link> |
         <router-link to="/admin">Admin</router-link> |
         <router-link to="/users">users</router-link> |
+        <router-link to="/cart">Cart</router-link> |
         <router-link to="/userProfile"><i class="fa-solid fa-user"></i></router-link>
         <router-link to="/"><button @click="logout">logout</button></router-link>
         |

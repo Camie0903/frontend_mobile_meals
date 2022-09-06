@@ -9,6 +9,8 @@
           <div class="card-body">
             <p class="card-text">{{ item.title }}</p>
             <p class="card-text">R{{ item.price }}</p>
+          <button class="md-primary" @submit="addToCart(id)">Add to Cart</button>
+
             <!-- <p class="card-text">{{ Product.descriptions }}</p> -->
           </div>
         </div>
@@ -20,7 +22,9 @@
 <script>
 // import ProductsCard from "@/components/ProductsCard.vue";
 export default {
-  props: ["id"],
+  name: "product",
+  props: ["id", "name", "image", "price"],
+  
 //   components: { 
 //     ProductsCard,
 //      },
@@ -36,6 +40,11 @@ export default {
 
     //   console.log(this.product);
   },
+  method:{
+    addToCart(id) {
+      this.$store.dispatch("addToCart, user_id")
+    }
+  }
 };
 </script>
 <style>
