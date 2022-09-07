@@ -29,6 +29,7 @@
         <artCart /> -->
       </div>
     </nav>
+   
   </template>
   <script>
 //   import artCart from "../components/cart.vue";
@@ -60,4 +61,4 @@
       },
     },
   };
-  </script>
+</script>
