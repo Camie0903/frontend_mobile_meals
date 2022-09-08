@@ -1,95 +1,52 @@
 <template>
-    <div id="shopping-cart">
-        <md-button class="md-accent md-raised" @click="showList()" id="show">{{ cartCount }}</md-button>
-  
-        <div id="shoppingList" class="shoppingBody">
-            <div class="md-layout" v-for="(product, index) in cart" :key="index">
-                <div class="md-layout-item">{{ product.title }}</div>
-                <div class="md-layout-item">
-                    <img :src="product.image" alt />
-                </div>
-                <div class="md-layout-item">{{ '$' + product.price }}</div>
-                <div class="md-layout-item">
-                    <md-button class="md-primary" @click="removeItem(index)">Remove Cart</md-button>
-                </div>
-            </div>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="artCart">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="ffartCart">Your cart details</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <div v-if="artCart">
+          <div class="card" v-for="art in artCart" :key="art">
+            <h2>
+              {{ art.name }}
+            </h2>
+            <a class="btn" @click="this.$store.dispatch('deletecartItem', art)">
+              <i class="fa-solid fa-trash-can"></i>
+            </a>
+          </div>
+          <button
+            class="btn btn-primary"
+            @click="this.$store.dispatch('clearcart')"
+          >
+            Clear Cart
+          </button>
         </div>
+        <div v-else>Nothing</div>
+      </div>
     </div>
-</template>
-
-<script>
-export default {
-name: "Shopping",
-computed: {
-StoreCart() {
- return this.$store.getters.StoreCart;
-},
-cartCount() {
- return this.StoreCart.length;
-},
-cart() {
- return this.$store.getters.StoreCart.map(cartitems => {
-   return this.$store.getters.products.find(itemForSale => {
-     return cartitems === itemForSale.id;
-   });
- });
-}
-},
-methods: {
-removeItem(index) {
- this.$store.dispatch("removeItem", index);
-},
-showList() {
- var modal = document.getElementById("shoppingList");
- var btn = document.getElementById("show");
- btn.onclick = function() {
-   modal.style.display = "block";
- };
- window.onclick = function(event) {
-   if (event.target == modal) {
-     modal.style.display = "none";
-   }
- };
-}
-}
-};
-</script>
-<style scoped>
-#shopping-cart {
-    width: 100%;
-    max-height: 400px;
-    border: 1px solid rgba(#000, 0.12);
-}
-.md-layout {
-    margin-top: 2%;
-    width: 70%;
-    background-color: rgb(255, 255, 255);
-    margin: auto;
-    z-index: 9999999;
-    padding: 20px;
-    border-bottom: 1px solid rgb(126, 126, 126);
-}  
-.md-layout-item {
-    margin-top: 2%;
-}          
-img {
-    width: 25%;
-}
-.md-span {
-    text-align: right;
-    width: 100%;
-}
-.shoppingBody {
-    display: none;
-    position: fixed;
-    z-index: 9999999;
-    padding-top: 25px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
-}
-</style>
+  </template>
+  <script>
+  export default {
+    props: ["product_id"],
+    computed: {
+      artCart() {
+        return this.$store.state.arts;
+      },
+    },
+  };
+  </script>
+  <style>
+  #artCart {
+    width: 50%;
+    background: rgba(255, 255, 255, 0.01);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  </style>

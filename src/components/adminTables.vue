@@ -12,6 +12,12 @@
         class="fa-solid fa-trash-can"
       ></i>
     </td>
+    <td>
+      <i
+        @click="editproduct(product.id)"
+        class="fa-solid fa-pen-to-square"
+      ></i>
+    </td>
   </tr>
 </template>
 <script>

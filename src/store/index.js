@@ -153,6 +153,77 @@ export default createStore({
       context.commit("REMOVE_Item", index);
     },
 
+    //cart
+    getcart: async (context, id) => {
+      id = context.state.user.user_id;
+      await fetch("https://lc-capstone.herokuapp.com/users/" + id + "/cart", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "x-auth-token": context.state.token,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          context.commit("setarts", data);
+        });
     },
-  modules: {},
-});
+    addTocart: async (context, art, id) => {
+      console.log(context.state.user);
+      id = context.state.user.user_id;
+      console.log(art);
+      await fetch("https://lc-capstone.herokuapp.com/users/" + id + "/cart", {
+        method: "POST",
+        body: JSON.stringify(art),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "x-auth-token": context.state.token,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          context.dispatch("getcart", id);
+        });
+    },
+    clearcart: async (context, id) => {
+      id = context.state.user.user_id;
+      await fetch("https://lc-capstone.herokuapp.com/users/" + id + "/cart", {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "x-auth-token": context.state.token,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          context.dispatch("getcart", id);
+        });
+    },
+    deletecartItem: async (context, list, id) => {
+      id = context.state.user.user_id;
+      await fetch(
+        "https://lc-capstone.herokuapp.com/users/" +
+          id +
+          "/cart/" +
+          list.cartid,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            "x-auth-token": context.state.token,
+          },
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          context.dispatch("getcart", id);
+        });
+    },
+  },
+
+    },
+);

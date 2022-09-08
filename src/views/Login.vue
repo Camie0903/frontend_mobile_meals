@@ -20,11 +20,11 @@
                 <input v-if="showPassword" type="text" class="input" v-model="password" placeholder="Password"/>
                 <input v-else type="password" class="input" v-model="password"  placeholder="Password">
                 <button class="eyebutton" @click="toggleShow">
-                  <i class="fas" :class="{ 'fa-eye-slash': showPassword, 'fa-eye': !showPassword }"></i>
+                  <i class="fas" :class="{ 'fa-eye-slash': showPassword, 'fa-eye': !showPassword }"> Show password </i>
                 </button>							
               </div>
        <div class="inputBox">
-								<button type="submit"  id="login-btn">Login</button>
+								<button type="submit"  id="login-btn" @click="login">Login</button>
 								<p class="forget">Forgot Password?
 									<a href="#">Click here</a>
 								</p>

@@ -15,6 +15,7 @@
       <th>image</th>
       <th>category</th>
       <th>Delete</th>
+      <th>Edit</th>
     </tr>
     <adminTables
       v-for="product in filteredproducts"

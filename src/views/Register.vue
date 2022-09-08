@@ -16,7 +16,13 @@
           <form @submit.prevent="register">
             <div class="inputBox">
               <input required class="register-form" type="email" v-model="email" placeholder="Email" />
-              <input required class="register-form" type="text" v-model="password" placeholder="Password" />
+              <div class="control is-expanded">
+                <input v-if="showPassword" type="text" class="input" v-model="password" placeholder="Password"/>
+                <input v-else type="password" class="input" v-model="password"  placeholder="Password">
+                <button class="eyebutton" @click="toggleShow">
+                  <i class="fas" :class="{ 'fa-eye-slash': showPassword, 'fa-eye': !showPassword }"> Show password </i>
+                </button>							
+              </div>
               <input required class="register-form" type="text" v-model="full_name" placeholder="Full Name" />
               <input required class="register-form" type="text" v-model="phone" placeholder="phone" />
               <input required class="register-form" type="text" v-model="user_type" placeholder="user_type" />
@@ -45,11 +51,15 @@ export default {
     users() {
       return this.$store.state.users;
     },
+    buttonLabel() {
+      return (this.showPassword) ? "Hide" : "Show";
+    }
   },
   data() {
     return {
       email: "",
       password: "",
+      showPassword: false,
       full_name: "",
       phone: "",
       user_type: "",
@@ -65,9 +75,10 @@ export default {
         user_type: this.user_type,
       });
     },
-  },
-
-
+    toggleShow() {
+      this.showPassword = !this.showPassword;
+    }
+  }
 };
 </script> 
 <style scoped>
