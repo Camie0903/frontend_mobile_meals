@@ -42,7 +42,7 @@
 }
 
 .cards {
-  margin-top: 25px;
+  margin-top: -33px;
   align-items: center;
   display: flex;
   flex-direction: row;

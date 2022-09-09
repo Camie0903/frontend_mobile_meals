@@ -1,6 +1,6 @@
 <template>
     <nav>
-      <div v-if="user !== null">
+      <!-- <div v-if="user !== null"> -->
         <!-- <router-link
           v-if="user !== null"
           :to="{ name: 'profile', params: { id: user.user_id } }"
@@ -10,9 +10,7 @@
 
         <router-link to="/about">About</router-link> |
         <router-link to="/products">Products</router-link> |
-        <router-link to="/register">Register</router-link> |
         <router-link to="/admin">Admin</router-link> |
-        <router-link to="/users">users</router-link> |
         <router-link to="/cart">Cart</router-link> |
         <router-link to="/userProfile"><i class="fa-solid fa-user"></i></router-link>
         <router-link to="/"><button @click="logout">logout</button></router-link>
@@ -27,7 +25,7 @@
           <i class="fa-solid fa-cart-shopping"></i>
         </button>
         <artCart /> -->
-      </div>
+      <!-- </div> -->
     </nav>
    
   </template>

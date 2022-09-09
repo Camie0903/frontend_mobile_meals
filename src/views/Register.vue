@@ -47,14 +47,6 @@
 </template>
  <script>
 export default {
-  computed: {
-    users() {
-      return this.$store.state.users;
-    },
-    buttonLabel() {
-      return (this.showPassword) ? "Hide" : "Show";
-    }
-  },
   data() {
     return {
       email: "",
@@ -65,6 +57,17 @@ export default {
       user_type: "",
     };
   },
+  computed: {
+    users(){
+      return this.$store.state.users;
+    },
+  
+    buttonLabel() {
+      return (this.showPassword) ? "Hide" : "Show";
+    }
+  },
+ 
+  
   methods: {
     register() {
       return this.$store.dispatch("register", {

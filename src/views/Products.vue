@@ -163,12 +163,13 @@ h2{
 }
 .filterbtns{
 display: flex;
+flex-wrap: wrap;
 align-items: flex-start;
 }
 .row {
   display: flex;
   flex-wrap: wrap;
-  gap: 6rem;
+  gap: 4rem;
   min-height:50px;
   min-width: 50px;
 }

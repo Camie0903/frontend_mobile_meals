@@ -82,24 +82,63 @@ export default createStore({
         
     },
     // REGISTER USER
-    register: async (context, user) => {
+    // register: async (context, user) => {
+    //   fetch("https://mobile-meals.herokuapp.com/users/register", {
+    //     method: "POST",
+    //     body: JSON.stringify(user),
+
+    //     headers: {
+    //       "Content-type": "application/json; charset=UTF-8",
+    //     },
+
+    //     headers: {
+    //       "Content-type": "application/json; charset=UTF-8",
+    //     },
+    //   })
+    //     .then((response) => response.json())
+    //     .then((json) => context.commit("setUser", json));
+    //         router.push("/products");
+    // },
+
+
+    // Register user
+    register: async (context, payload) => {
+      const {
+        email,
+        password,
+        full_name,
+        phone,
+        user_type,
+      } = payload;
       fetch("https://mobile-meals.herokuapp.com/users/register", {
         method: "POST",
-        body: JSON.stringify(user),
-
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-
+        mode:'no-cors',
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          full_name: full_name,
+          phone: phone,
+          user_type: user_type,
+        }),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
       })
         .then((response) => response.json())
-        .then((json) => context.commit("setUser", json));
-            router.push("/products");
+        .then((json) => {
+          console.log(json);
+          context.commit("setusers", json);
+        });
+        console.log(payload);
     },
 
+    getusers: async(context) => {
+      fetch("https://mobile-meals.herokuapp.com/users")
+      .then((res) => res.json())
+      .then((users) => context.commit("setusers", users));
+    },
+
+    
     // Get Products
     getproducts: async (context) => {
       fetch("https://mobile-meals.herokuapp.com/products")
@@ -153,76 +192,7 @@ export default createStore({
       context.commit("REMOVE_Item", index);
     },
 
-    //cart
-    getcart: async (context, id) => {
-      id = context.state.user.user_id;
-      await fetch("https://lc-capstone.herokuapp.com/users/" + id + "/cart", {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-          "x-auth-token": context.state.token,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          context.commit("setarts", data);
-        });
-    },
-    addTocart: async (context, art, id) => {
-      console.log(context.state.user);
-      id = context.state.user.user_id;
-      console.log(art);
-      await fetch("https://lc-capstone.herokuapp.com/users/" + id + "/cart", {
-        method: "POST",
-        body: JSON.stringify(art),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-          "x-auth-token": context.state.token,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          context.dispatch("getcart", id);
-        });
-    },
-    clearcart: async (context, id) => {
-      id = context.state.user.user_id;
-      await fetch("https://lc-capstone.herokuapp.com/users/" + id + "/cart", {
-        method: "DELETE",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-          "x-auth-token": context.state.token,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          context.dispatch("getcart", id);
-        });
-    },
-    deletecartItem: async (context, list, id) => {
-      id = context.state.user.user_id;
-      await fetch(
-        "https://lc-capstone.herokuapp.com/users/" +
-          id +
-          "/cart/" +
-          list.cartid,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            "x-auth-token": context.state.token,
-          },
-        }
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          context.dispatch("getcart", id);
-        });
-    },
+    
   },
 
     },

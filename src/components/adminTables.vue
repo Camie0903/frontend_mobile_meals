@@ -40,4 +40,5 @@ td,
 th {
   border: 2px solid black;
 }
+
 </style>

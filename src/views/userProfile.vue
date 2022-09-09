@@ -1,102 +1,227 @@
 <template>
-    <div id="app">
-        <button @click="showModal = true" class="button">Show Modal</button>
-        <transition name="fade" appear>
-          <div class="modal-overlay" 
-               v-if="showModal" 
-               @click="showModal = false"></div>
-        </transition>
-        <transition name="pop" appear>
-          <div class="modal" 
-               role="dialog" 
-               v-if="showModal"
-               >
-            <h1>Vue Transitions</h1>
-            <p>The <code>&lt;transition&gt;</code> component in Vue can create wonderful animated entrances and exits.</p>
-            <button @click="showModal = false" class="button">Hide Modal</button>
-      
-          </div>
-        </transition>
+  <div
+    id="main"
+    v-if="user"
+    class="account container d-flex justify-content-center align-items-center flex-column"
+  >
+    <h2 class="pb-5">MANAGE YOUR ACCOUNT</h2>
+    <div id="UserCard" class="row w-100">
+      <div
+        class="col-md-6 d-flex justify-content-center gap-5 align-items-center flex-column"
+      >
+        <i id="userIcon" class="fa-solid fa-circle-user"></i>
+        <div class="d-flex flex-column align-items-center">
+          <button
+            data-bs-toggle="modal"
+            data-bs-target="#Logout"
+            class="btn btn-grad"
+          >
+            Log Out
+          </button>
+          <button
+            data-bs-toggle="modal"
+            data-bs-target="#userDelete"
+            class="btn btn-grad"
+          >
+            Delete Your Account
+          </button>
+        </div>
+        <DeleteAccountModal />
+        <LogOutModal />
       </div>
+      <div class="col-md-6">
+        <form @submit="updateUser">
+          <div class="row mb-3"></div>
+          <div class="col-lg-6 mb-3 mt-4 mt-md-0">
+            <label for="fullname" class="form-label">fullname</label>
+            <input
+              v-model="fullname"
+              type="text"
+              class="form-control"
+              name="full_name"
+              id="full_name"
+              @input="changefullnameColor"
+            />
+          </div>
+          <!-- <div class="mb-3">
+            <label for="billing_address" class="form-label"
+              >billing_address</label
+            >
+            <input
+              v-model="billing_address"
+              type="text"
+              class="form-control"
+              name="billing_address"
+              id="billing_address"
+              @input="changebilling_addressColor"
+            />
+          </div> -->
+          <div class="mb-3">
+            <label for="phone" class="form-label">Phone Number</label>
+            <input
+              v-model="phone_number"
+              type="number"
+              class="form-control"
+              name="phone_number"
+              id="phone_number"
+              @input="changephone_numberColor"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              v-model="email"
+              class="form-control"
+              name="email"
+              id="email"
+              @input="changeemailColor"
+            />
+          </div>
+          <div>
+            <button type="submit" class="w-100 mx-auto btn btn-grad">
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div
+    id="main"
+    v-else
+    class="account container d-flex justify-content-center align-items-center gap-4 flex-column"
+  >
+    <h1>There is No User Logged in</h1>
+    <router-link to="/login">
+      <button class="btn btn-grad">Return to Login Page</button>
+    </router-link>
+  </div>
 </template>
 <script>
-export default{
-    data() {
+export default {
+  components: {},
+  data() {
     return {
-      showModal: true
+      id: null,
+      fullname: null,
+      phone_number: null,
+      email: null,
+      password: null,
+    };
+  },
+  computed: {
+    user() {
+      return this.$store.state.user;
+    },
+  },
+  async mounted() {
+    if (this.user) {
+      this.id = this.$store.state.user.id;
+      this.fullname = this.$store.state.user.fullname;
+      this.phone_number = this.$store.state.user.phone_number;
+      this.email = this.$store.state.user.email;
     }
-  } 
-}
+    window.scrollTo(0, 0);
+  },
+  methods: {
+    changefull_nameColor() {
+      if (this.fullname != this.$store.state.user.fullname) {
+        document.getElementById("fullname").style.background = "#d99";
+      } else {
+        document.getElementById("fullname").style.background = "#FFF";
+      }
+    },
+    // changebilling_addressColor() {
+    //   if (this.billing_address != this.$store.state.user.billing_address) {
+    //     document.getElementById("billing_address").style.background = "#d99";
+    //   } else {
+    //     document.getElementById("billing_address").style.background = "#FFF";
+    //   }
+    // },
+    changeEmailColor() {
+      if (this.email != this.$store.state.user.email) {
+        document.getElementById("email").style.background = "#d99";
+      } else {
+        document.getElementById("email").style.background = "#FFF";
+      }
+    },
+    changephone_numberColor() {
+      if (this.phone_number != this.$store.state.user.phone_number) {
+        document.getElementById("phone_number").style.background = "#d99";
+      } else {
+        document.getElementById("phone_number").style.background = "#FFF";
+      }
+    },
+    updateUser(e) {
+      e.preventDefault();
+      let newUser = {
+        id: this.id,
+        fullname: this.fullname,
+        email: this.email,
+        phone_number: this.phone_number,
+        userPassword: "John123",
+      };
+      this.$store.dispatch("updateUser", newUser);
+    },
+  },
+};
 </script>
 <style scoped>
-    .button {
-        border: none;
-        color: #FFF;
-        background: #42b983;
-        appearance: none;
-        font: inherit;
-        font-size: 1.8rem;
-        padding: .5em 1em;
-        border-radius: .3em;
-        cursor: pointer;
-      }
-      
-      .modal {
-        position: absolute;
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        margin: auto;
-        text-align: center;
-        width: fit-content;
-        height: fit-content;
-        max-width: 22em;
-        padding: 2rem;
-        border-radius: 1rem;
-        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
-        background: #FFF;
-        z-index: 999;
-        transform: none;
-      }
-      .modal h1 {
-        margin: 0 0 1rem;
-      }
-      
-      .modal-overlay {
-        content: '';
-        position: absolute;
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 998;
-        background: #2c3e50;
-        opacity: 0.6;
-        cursor: pointer;
-      }
-      
-      /* ---------------------------------- */
-      .fade-enter-active,
-      .fade-leave-active {
-        transition: opacity .4s linear;
-      }
-      
-      .fade-enter,
-      .fade-leave-to {
-        opacity: 0;
-      }
-      
-      .pop-enter-active,
-      .pop-leave-active {
-        transition: transform 0.4s cubic-bezier(0.5, 0, 0.5, 1), opacity 0.4s linear;
-      }
-      
-      .pop-enter,
-      .pop-leave-to {
-        opacity: 0;
-        transform: scale(0.3) translateY(-50%);
-      }
+#userIcon {
+  font-size: 12rem;
+}
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 10rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.pb-5 {
+  padding-bottom: 5rem !important;
+}
+#UserCard {
+  box-shadow: 0 0 14px #eee;
+  padding: 50px;
+}
+.btn-grad {
+  background-image: linear-gradient(
+    to right,
+    #E52D27 0%,
+    #B31217 51%,
+    #E52D27 100%
+  );
+  margin: 10px;
+  padding: 10px 15px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  font-size: 12px;
+}
+.btn-grad:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
+}
 </style>
+
+
+
+
+
+
